@@ -13,3 +13,71 @@
 //
 // Inseriamo la validazione: se l'utente mette due numeri uguali o inserisce cose diverse da numeri lo blocchiamo in qualche modo.
 // Se l’utente ha inserito qualcosa di non valido, segnaliamolo visivamente nel form.
+
+const actualNumber = document.getElementById("actualNumber");
+const formNumber = document.getElementById("numberForm");
+const inputNumber1 = document.getElementById("Number1");
+const inputNumber2 = document.getElementById("Number2");
+const inputNumber3 = document.getElementById("Number3");
+const inputNumber4 = document.getElementById("Number4");
+const inputNumber5 = document.getElementById("Number5");
+const inputGuessedNumbers = document.getElementById("guessedNumbers");
+const retryButton = document.getElementById("retryButton");
+
+//Genero i numeri
+const numbers = [5];
+for (let i = 0; i < 5; i++) numbers[i] = generateNumber(10, 99);
+
+//Mostro i numeri all'utente
+actualNumber.textContent = numbers.join(" - ");
+
+// Avvio il timer di 30 secondi
+setTimeout(hideNumbers, 30000);
+
+// Nascondo i numeri all'utente
+function hideNumbers() {
+    //Rendo invisibile i numeri da indovinare
+    actualNumber.classList.add("invisible");
+}
+
+// Funzione Submit del Form
+formNumber.addEventListener("submit", (e) => {
+    // Prevengo l'invio dei dati ed il reload della pagina
+    e.preventDefault();
+
+    //Prelevo i numeri dell'utente
+    const userNumbers = [5];
+    userNumbers[0] = inputNumber1.value;
+    userNumbers[1] = inputNumber2.value;
+    userNumbers[2] = inputNumber3.value;
+    userNumbers[3] = inputNumber4.value;
+    userNumbers[4] = inputNumber5.value;
+
+    // Variabili per il controllo
+    let correctCounter = 0;
+    let correctNumbers = [];
+    for (let i = 0; i < 5; i++) {
+        // Se l'utente ha indovinato un numero
+        if (numbers.includes(userNumbers[i])) {
+            correctCounter++;
+            correctNumbers.add(userNumbers[i]);
+        }
+    }
+
+    // Mostro il risultato all'utente
+    if (correctCounter != 0) {
+        inputGuessedNumbers.textContent = `Hai indovinato ${correctCounter} numeri! (${correctCounter.join(
+            ", "
+        )})`;
+    } else {
+        inputGuessedNumbers.textContent = `Non hai indovinato neanche un numero!`;
+    }
+
+    // Mostro il pulsante riprova
+    retryButton.classList.remove("invisible");
+});
+
+// Funzioe generatrice di numeri
+function generateNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

@@ -28,10 +28,10 @@
     <body>
         <!-- Main -->
         <main>
-            <form class="row g-5 needs-validation p-5" novalidate>
+            <form id="numberForm" class="row g-5 needs-validation p-5">
                 <!-- Pulsante Submit e Info -->
                 <div class="col-12 d-flex flex-column align-items-center">
-                    <h1 id="actualNumber" class="invisible">0</h1>
+                    <h1 id="actualNumber"></h1>
 
                     <label for="Number1"
                         >Inserisci tutti i numeri che ricordi (l'ordine non è
@@ -96,12 +96,18 @@
                 <!-- Pulsante Submit e Info -->
                 <div class="col-12 d-flex flex-column align-items-center">
                     <!-- Pulsante Conferma -->
-                    <button class="btn btn-primary mb-2" type="submit">
-                        Conferma
-                    </button>
+                    <button class="btn btn-primary mb-2">Conferma</button>
 
                     <!-- Testo Informativo -->
-                    <p>Hai indovinato 0 numeri!</p>
+                    <p id="guessedNumbers"></p>
+                </div>
+
+                <!-- Pulsante Riprova -->
+                <div class="col-12 d-flex flex-column align-items-center">
+                    <!-- Pulsante Conferma -->
+                    <div id="retryButton" class="btn btn-primary invisible">
+                        <a href="index.html">Riprovare?</a>
+                    </div>
                 </div>
             </form>
         </main>
