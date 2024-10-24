@@ -15,6 +15,7 @@
 // Se l’utente ha inserito qualcosa di non valido, segnaliamolo visivamente nel form.
 
 const actualNumber = document.getElementById("actualNumber");
+const numerLabel = document.getElementById("numerLabel");
 const formNumber = document.getElementById("numberForm");
 const inputNumber1 = document.getElementById("Number1");
 const inputNumber2 = document.getElementById("Number2");
@@ -22,6 +23,7 @@ const inputNumber3 = document.getElementById("Number3");
 const inputNumber4 = document.getElementById("Number4");
 const inputNumber5 = document.getElementById("Number5");
 const inputGuessedNumbers = document.getElementById("guessedNumbers");
+const submitButton = document.getElementById("submitButton");
 const retryButton = document.getElementById("retryButton");
 
 //Genero i numeri
@@ -38,6 +40,19 @@ setTimeout(hideNumbers, 30000);
 function hideNumbers() {
     //Rendo invisibile i numeri da indovinare
     actualNumber.classList.add("invisible");
+
+    //Cambio il testo della label
+    numerLabel.textContent = `Inserisci tutti i numeri che ricordi (l'ordine non è importante)`;
+
+    //Mostro gli input field
+    inputNumber1.classList.remove("invisible");
+    inputNumber2.classList.remove("invisible");
+    inputNumber3.classList.remove("invisible");
+    inputNumber4.classList.remove("invisible");
+    inputNumber5.classList.remove("invisible");
+
+    //Mostro il pulsante conferma
+    submitButton.classList.remove("invisible");
 }
 
 // Funzione Submit del Form
@@ -46,27 +61,35 @@ formNumber.addEventListener("submit", (e) => {
     e.preventDefault();
 
     //Prelevo i numeri dell'utente
-    const userNumbers = [5];
+    const userNumbers = [];
     userNumbers[0] = inputNumber1.value;
     userNumbers[1] = inputNumber2.value;
     userNumbers[2] = inputNumber3.value;
     userNumbers[3] = inputNumber4.value;
     userNumbers[4] = inputNumber5.value;
 
+    //Modifico i valori
+    for (let i = 0; i < 5; i++) {
+        numbers[i] = parseInt(numbers[i]);
+        userNumbers[i] = parseInt(userNumbers[i]);
+    }
+
     // Variabili per il controllo
     let correctCounter = 0;
     let correctNumbers = [];
+
+    // Controllo i numeri
     for (let i = 0; i < 5; i++) {
         // Se l'utente ha indovinato un numero
         if (numbers.includes(userNumbers[i])) {
             correctCounter++;
-            correctNumbers.add(userNumbers[i]);
+            correctNumbers.push(userNumbers[i]);
         }
     }
 
     // Mostro il risultato all'utente
-    if (correctCounter != 0) {
-        inputGuessedNumbers.textContent = `Hai indovinato ${correctCounter} numeri! (${correctCounter.join(
+    if (correctCounter !== 0) {
+        inputGuessedNumbers.textContent = `Hai indovinato ${correctCounter} numeri! (${correctNumbers.join(
             ", "
         )})`;
     } else {

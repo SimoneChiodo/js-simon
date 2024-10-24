@@ -33,9 +33,8 @@
                 <div class="col-12 d-flex flex-column align-items-center">
                     <h1 id="actualNumber"></h1>
 
-                    <label for="Number1"
-                        >Inserisci tutti i numeri che ricordi (l'ordine non è
-                        importante)</label
+                    <label for="Number1" id="numerLabel"
+                        >Memorizza tutti i numeri!</label
                     >
                 </div>
 
@@ -43,7 +42,7 @@
                 <div class="col">
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control invisible"
                         id="Number1"
                         required
                     />
@@ -53,8 +52,7 @@
                 <div class="col">
                     <input
                         type="text"
-                        class="form-control"
-                        id="firstNumber"
+                        class="form-control invisible"
                         id="Number2"
                         required
                     />
@@ -64,8 +62,7 @@
                 <div class="col">
                     <input
                         type="text"
-                        class="form-control"
-                        id="firstNumber"
+                        class="form-control invisible"
                         id="Number3"
                         required
                     />
@@ -75,8 +72,7 @@
                 <div class="col">
                     <input
                         type="text"
-                        class="form-control"
-                        id="firstNumber"
+                        class="form-control invisible"
                         id="Number4"
                         required
                     />
@@ -86,8 +82,7 @@
                 <div class="col">
                     <input
                         type="text"
-                        class="form-control"
-                        id="firstNumber"
+                        class="form-control invisible"
                         id="Number5"
                         required
                     />
@@ -96,7 +91,12 @@
                 <!-- Pulsante Submit e Info -->
                 <div class="col-12 d-flex flex-column align-items-center">
                     <!-- Pulsante Conferma -->
-                    <button class="btn btn-primary mb-2">Conferma</button>
+                    <button
+                        id="submitButton"
+                        class="btn btn-primary mb-2 invisible"
+                    >
+                        Conferma
+                    </button>
 
                     <!-- Testo Informativo -->
                     <p id="guessedNumbers"></p>
@@ -104,7 +104,6 @@
 
                 <!-- Pulsante Riprova -->
                 <div class="col-12 d-flex flex-column align-items-center">
-                    <!-- Pulsante Conferma -->
                     <div id="retryButton" class="btn btn-primary invisible">
                         <a href="index.html">Riprovare?</a>
                     </div>
