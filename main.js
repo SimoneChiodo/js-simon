@@ -24,12 +24,19 @@ const inputNumber3 = document.getElementById("Number3");
 const inputNumber4 = document.getElementById("Number4");
 const inputNumber5 = document.getElementById("Number5");
 const inputGuessedNumbers = document.getElementById("guessedNumbers");
+const inputWrongNumbers = document.getElementById("wrongNumbers");
 const submitButton = document.getElementById("submitButton");
 const retryButton = document.getElementById("retryButton");
 
 //Genero i numeri
-const numbers = [5];
-for (let i = 0; i < 5; i++) numbers[i] = generateNumber(10, 99);
+const numbers = [];
+for (let i = 0; i < 5; i++) {
+    // Salvo il nuovo numero in una nuova variabile
+    let newNumber = generateNumber(10, 99);
+
+    // Controllo che il nuovo numero non sia già stato inserito
+    if (!numbers.includes(newNumber)) numbers.push(newNumber);
+}
 
 //Mostro i numeri all'utente
 actualNumber.textContent = numbers.join(" - ");
@@ -96,6 +103,7 @@ formNumber.addEventListener("submit", (e) => {
     // Variabili per il controllo
     let correctCounter = 0;
     let correctNumbers = [];
+    let wrongNumbers = [];
 
     // Controllo i numeri
     for (let i = 0; i < 5; i++) {
@@ -104,13 +112,23 @@ formNumber.addEventListener("submit", (e) => {
             correctCounter++;
             correctNumbers.push(userNumbers[i]);
         }
+        // Se l'utente ha sbagliato un numero
+        if (!userNumbers.includes(numbers[i])) wrongNumbers.push(numbers[i]);
     }
 
     // Mostro il risultato all'utente
     if (correctCounter !== 0) {
+        // Scrivo i numeri corretti
         inputGuessedNumbers.textContent = `Hai indovinato ${correctCounter} numeri! (${correctNumbers.join(
             ", "
         )})`;
+
+        //Scrivo i numeri errati (se ce ne sono)
+        if (wrongNumbers != 0) {
+            inputWrongNumbers.textContent = `(Sbagliati: ${wrongNumbers.join(
+                ", "
+            )})`;
+        }
     } else {
         inputGuessedNumbers.textContent = `Non hai indovinato neanche un numero!`;
     }
