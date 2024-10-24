@@ -14,6 +14,7 @@
 // Inseriamo la validazione: se l'utente mette due numeri uguali o inserisce cose diverse da numeri lo blocchiamo in qualche modo.
 // Se l’utente ha inserito qualcosa di non valido, segnaliamolo visivamente nel form.
 
+const remainingSeconds = document.getElementById("remainingSeconds");
 const actualNumber = document.getElementById("actualNumber");
 const numerLabel = document.getElementById("numerLabel");
 const formNumber = document.getElementById("numberForm");
@@ -34,10 +35,28 @@ for (let i = 0; i < 5; i++) numbers[i] = generateNumber(10, 99);
 actualNumber.textContent = numbers.join(" - ");
 
 // Avvio il timer di 30 secondi
-setTimeout(hideNumbers, 30000);
+setTimeout(hideNumbersCountdown, 30000);
+
+// Creo una variabile per contare i secondi rimanenti
+let countdownSeconds = 29;
+// Funzione per aggiornare i secondi rimanenti
+const updateCountdown = () => {
+    remainingSeconds.textContent = `${countdownSeconds--}s`;
+
+    // Quando arriva a 0 lo elimino
+    if (countdownSeconds === -1) {
+        // Blocco l'aggiornamento della funzione
+        clearInterval(countdown);
+
+        // Rendo invisibile i secondi
+        remainingSeconds.classList.add("invisible");
+    }
+};
+// Aggiorno i secondi rimanenti
+const countdown = setInterval(updateCountdown, 1000);
 
 // Nascondo i numeri all'utente
-function hideNumbers() {
+function hideNumbersCountdown() {
     //Rendo invisibile i numeri da indovinare
     actualNumber.classList.add("invisible");
 
